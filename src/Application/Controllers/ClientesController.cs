@@ -36,21 +36,23 @@ namespace Clientes.Application.Controllers
         [HttpGet]
         public async Task<ActionResult> GetAsync()
         {
-            var cliente = await _clienteService.GetAsync();
+            var clientes = await _clienteService.GetAsync();
 
-            if (cliente == null)
+            if (clientes == null|| clientes.Count == 0)
                 return NotFound();
 
-            return Ok(cliente);
+            return Ok(clientes);
         }
 
-        [HttpGet("{id}", Name = "GetCliente")]
-        public async Task<IActionResult> GetAsync(int id)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetByIdAsync(int id)
         {
-            if (id == 0)
-                return NotFound();
+            var cliente = await _clienteService.GetByIdAsync(id);
 
-            return Ok(await _clienteService.GetByIdAsync(id));
+            if (cliente == null)
+                return NotFound();            
+
+            return Ok(cliente);
         }
 
         [HttpGet("cpf/{cpf}")]

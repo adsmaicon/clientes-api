@@ -8,6 +8,7 @@ nupkg/
 # Visual Studio Code
 .vscode
 .env
+coverage.cobertura.xml
 
 # Rider
 .idea
